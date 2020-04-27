@@ -81,7 +81,7 @@ class RoomScanner:
 		#rospy.spin()
 		
 	def moveForward(self):
-		print("moving forward 1 foot")
+		print("moving forward 2 feet")
 		speed = 0.25		
 		
 		#all components set to zero except linear x
@@ -100,7 +100,7 @@ class RoomScanner:
 		t0 = rospy.Time.now().to_sec()
 		current_distance = 0
 	 
-		while(current_distance < 0.305):
+		while(current_distance < 0.6):
 									
 			#print(self.vel_msg)
 			self.velocity_publisher.publish(self.vel_msg)
@@ -127,17 +127,18 @@ class RoomScanner:
 				if(self.bump):
 					print("WALL HIT. STOPPING")
 					self.bump = False
-					exit()
+					self.rotate(180, True)
+					#exit()
 				#If wall is closer than a foot away then turn around	
-				elif(min(self.laser.ranges[60:299]) < 0.6):
+				elif(min(self.laser.ranges[60:299]) < 1):
 					print("wall detected in front. Turning around")
 					self.rotate(180, True)
 				#If a wall is detected to the right then turn 15 degrees left
-				elif(min(self.laser.ranges[0:59]) < 0.6):
+				elif(min(self.laser.ranges[0:59]) < 1):
 					print("wall detected to the right. turning left")
 					self.rotate(15, False)
 				#If a wall is detected to the left then turn 15 degrees right
-				elif(min(self.laser.ranges[300:359]) < 0.6):
+				elif(min(self.laser.ranges[300:359]) < 1):
 					print("wall detected to the left. turning right")
 					self.rotate(15, True)
 				#Else move forward
