@@ -7,3 +7,9 @@ To launch the world:
 4. Now you should be able to run `roslaunch big_project_pkg big_project.launch` and it will launch the world in gazebo.  
   
 I also added the code from project 1 so that should be runnable.
+
+The two programs for the big project are in `src/`  
+  
+`summon.py` is the summon function and can be ran using `rosrun big_project_pkg summon.py`  
+  
+`landmarkID.py` is the landmark identification function and it can be ran using `rosrun big_project_pkg landmarkID.py`
